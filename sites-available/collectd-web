@@ -1,0 +1,16 @@
+server {
+	listen 80;
+	listen [::]:80;
+	listen 443;
+	listen [::]:443;
+
+	include conf.d/redirect2https.inc;
+
+	server_name collectd.blog.ustc.edu.cn;
+
+	location / {
+		proxy_pass http://127.0.0.1:8888/;
+		proxy_redirect default;
+		proxy_set_header Host $http_host;
+	}
+}
