@@ -19,3 +19,16 @@ server {
         fastcgi_param  SERVER_NAME      $host;
     }
 }
+
+server {
+    listen 80;
+    listen 443;
+    listen [::]:80;
+    listen [::]:443;
+
+    server_name wlt.ustc.edu.cn 202.38.64.59;
+
+    location / {
+	rewrite ^/(.*)$ http://vpn.lug.ustc.edu.cn redirect;
+    }
+}
