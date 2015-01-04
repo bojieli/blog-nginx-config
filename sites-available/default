@@ -4,7 +4,13 @@ server {
 	listen [::]:80 ipv6only=on default_server;
 	listen [::]:443 ipv6only=on default_server spdy ssl;
 
-	rewrite ^/(.*)$ https://blog.ustc.edu.cn/$1 redirect;
+	root /usr/share/nginx/nonexistent;
+
+	error_page 404 /404.html;
+	location = /404.html {
+		internal;
+		root /usr/share/nginx/html;
+	}
 }
 
 server {
