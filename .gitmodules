@@ -1,0 +1,3 @@
+[submodule "ngx_lua_waf"]
+	path = ngx_lua_waf
+	url = https://github.com/loveshell/ngx_lua_waf.git
