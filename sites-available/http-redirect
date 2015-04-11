@@ -17,3 +17,18 @@ server {
 
     rewrite ^/(.*)$ http://ring0.me/$1 permanent;
 }
+
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name www.teenker.me teenker.me;
+
+    access_log /var/log/nginx/freeshell.access.log;
+    error_log  /var/log/nginx/freeshell.error.log;
+
+    location / {
+        proxy_pass http://202.38.70.159:8077;
+        proxy_redirect default;
+    }
+}
