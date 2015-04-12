@@ -122,8 +122,6 @@ server {
 
 	include conf.d/redirect2https.inc;
 
-	client_max_body_size 0;
-
 	location / {
 		proxy_pass http://202.38.70.200:80;
                 proxy_set_header Host       $http_host;

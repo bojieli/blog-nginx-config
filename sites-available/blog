@@ -8,6 +8,8 @@ server {
 
 	include conf.d/redirect2https.inc;
 
+	client_max_body_size 100m;
+
         access_log /var/log/nginx/blog/access.log logverbose;
         error_log  /var/log/nginx/blog/error.log;
 
