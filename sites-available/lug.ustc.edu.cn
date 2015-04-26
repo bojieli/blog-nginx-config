@@ -8,6 +8,9 @@ server {
     server_name lug.ustc.edu.cn;
     root   /srv/lug.ustc.edu.cn;
 
+    ssl_certificate     /etc/nginx/ssl-keys/lug-alphassl-bundle.crt;
+    ssl_certificate_key /etc/nginx/ssl-keys/lug-alphassl-nopasswd.key;
+
     include conf.d/redirect2https.inc;
 
     access_log  /var/log/nginx/lug.ustc.edu.cn/access.log;
