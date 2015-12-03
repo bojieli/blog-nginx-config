@@ -5,6 +5,11 @@ server {
 	listen [::]:443;
 
 	server_name blog.lug.ustc.edu.cn;
+
+        ssl_certificate     /etc/nginx/ssl-keys/lug-alphassl-bundle.crt;
+        ssl_certificate_key /etc/nginx/ssl-keys/lug-alphassl-nopasswd.key;
+
 	rewrite ^/(.*) $scheme://blog.ustc.edu.cn/$1 permanent;
+#	rewrite ^(.*)$ https://lug.ustc.edu.cn/blog/2015/06/201406-server-fault-announce/ break;
 }
 

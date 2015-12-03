@@ -4,6 +4,9 @@ server {
 	listen [::]:80 ipv6only=on default_server;
 	listen [::]:443 ipv6only=on default_server spdy ssl;
 
+        ssl_certificate     /etc/nginx/ssl-keys/blog-alphassl-bundle.crt;
+        ssl_certificate_key /etc/nginx/ssl-keys/blog-alphassl-nopasswd.key;
+
 	root /etc/nginx/html/nonexistent;
 
 	error_page 404 /404.html;
@@ -20,9 +23,6 @@ server {
 	listen [::]:443;
 
 	server_name blog.ustc.edu.cn;
-
-        ssl_certificate     /etc/nginx/ssl-keys/blog-alphassl-bundle.crt;
-        ssl_certificate_key /etc/nginx/ssl-keys/blog-alphassl-nopasswd.key;
 
 	client_max_body_size 2m;
 
@@ -43,4 +43,5 @@ server {
 			fastcgi_param  SERVER_NAME      blog.ustc.edu.cn;
 		}
 	}
+	#rewrite ^(.*)$ https://lug.ustc.edu.cn/blog/2015/06/201406-server-fault-announce/ break;
 }

@@ -1,71 +1,25 @@
+#server {
+#        server_name ~(?<name>[\w-]+)\.blog\.ustc\.edu\.cn$;
+#	listen 80;
+#	listen [::]:80;
+#	if ( $http_x_original_host = "" ) {
+#		return 301 https://$http_host$request_uri;
+#	}
+#	include sites-available/blog.common.conf;
+#}
+
 server {
-        listen   80;
+	listen 80;
+	listen [::]:80;
 	listen   443;
-        listen   [::]:80;
 	listen   [::]:443;
 
-        server_name  *.blog.ustc.edu.cn;
+        server_name ~(?<name>[\w-]+)\.blog\.ustc\.edu\.cn$;
 
+	#*.blog.ustc.edu.cn;
+	#return 302;
+	ssl on;
 	ssl_certificate     /etc/nginx/ssl-keys/blog-alphassl-bundle.crt;
 	ssl_certificate_key /etc/nginx/ssl-keys/blog-alphassl-nopasswd.key;
-
-	include conf.d/redirect2https.inc;
-
-	client_max_body_size 100m;
-
-        access_log /var/log/nginx/blog/access.log logverbose;
-        error_log  /var/log/nginx/blog/error.log;
-
-        error_page 502 = http://blog.ustc.edu.cn/need_activate.php;
-        error_page 404 = http://blog.ustc.edu.cn/404.html;
-
-	set_by_lua $root 'local _,_,match = string.find(ngx.var.host, "([%w-]+)\.blog\.ustc\.edu\.cn$")
-		if match == nil then
-			return "/nonexist"
-		else
-			return "/srv/blog/base/" .. match
-		end';
-	root $root;
-	set_by_lua $real_http_host 'if ngx.var.http_x_original_host then return ngx.var.http_x_original_host else return ngx.var.http_host end';
-
-
-        location ~ \.php$ {
-            include        fastcgi_params;
-            fastcgi_pass   unix://var/run/ustcblog/php-fpm.sock;
-            fastcgi_index  index.php;
-            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-            fastcgi_param  SERVER_NAME      $host;
-            fastcgi_param  HTTP_HOST        $real_http_host;
-        }
-
-        location / {
-            # wordpress reads uri from REQUEST_URI and does not require /index.php?q=$uri&$args
-            # Note: /index.php must be the last item in try_files, otherwise the php source code would be shown.
-            try_files $uri $uri/ /index.php;
-            index  index.html index.htm index.php;
-
-            rewrite ^/[a-zA-Z0-9._-]+(/wp-.*)$ $1 last;
-        }
-
-        subs_filter_types text/html text/css text/javascript text/xml;
-        #subs_filter //fonts.googleapis.com/         //fonts.lug.ustc.edu.cn/;
-        subs_filter //ajax.googleapis.com/          //ajax.lug.ustc.edu.cn/;
-        subs_filter //themes.googleusercontent.com/ //google-themes.lug.ustc.edu.cn/;
-        #subs_filter //fonts.gstatic.com/            //fonts-gstatic.lug.ustc.edu.cn/;
-        subs_filter //secure.gravatar.com/          //gravatar.lug.ustc.edu.cn/;
-        subs_filter //www.gravatar.com/             //gravatar.lug.ustc.edu.cn/;
-
-	# ngx_pagespeed config
-	pagespeed off;
-	
-	# Needs to exist and be writable by nginx.  Use tmpfs for best performance.
-	pagespeed FileCachePath /tmp/ngx_pagespeed_cache;
-	
-	# Ensure requests for pagespeed optimized resources go to the pagespeed handler
-	# and no extraneous headers get set.
-	location ~ "\.pagespeed\.([a-z]\.)?[a-z]{2}\.[^.]{10}\.[^.]+" {
-	  add_header "" "";
-	}
-	location ~ "^/pagespeed_static/" { }
-	location ~ "^/ngx_pagespeed_beacon$" { }
+	include sites-available/blog.common.conf;
 }

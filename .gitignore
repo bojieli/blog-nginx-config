@@ -1,0 +1,7 @@
+*.key
+*.dpkg-bak
+*.dpkg-dist
+autogen-conf-blog/
+trashbin/
+ssl-keys/
+blog-keys/

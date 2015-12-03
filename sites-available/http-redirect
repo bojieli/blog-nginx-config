@@ -1,34 +1,19 @@
 # conf for http redirect domains
 
-server {
-    listen 80;
-    listen [::]:80;
-    
-    listen 443;
-    listen [::]:443;
-
-    server_name *.bojieli.com bojieli.com;
-    
-    ssl_certificate     /etc/nginx/ssl-keys/bojieli.com.crt;
-    ssl_certificate_key /etc/nginx/ssl-keys/bojieli.com.key;
-
-    access_log /var/log/nginx/blog/access.log logverbose;
-    error_log  /var/log/nginx/blog/error.log;
-
-    rewrite ^/(.*)$ http://ring0.me/$1 permanent;
-}
-
-server {
-    listen 80;
-    listen [::]:80;
-
-    server_name www.teenker.me teenker.me;
-
-    access_log /var/log/nginx/freeshell.access.log;
-    error_log  /var/log/nginx/freeshell.error.log;
-
-    location / {
-        proxy_pass http://202.38.70.159:8077;
-        proxy_redirect default;
-    }
-}
+#server {
+#    listen 80;
+#    listen [::]:80;
+#    
+#    listen 443;
+#    listen [::]:443;
+#
+#    server_name *.bojieli.com bojieli.com;
+#    
+#    ssl_certificate     /etc/nginx/ssl-keys/bojieli.com.crt;
+#    ssl_certificate_key /etc/nginx/ssl-keys/bojieli.com.key;
+#
+#    access_log /var/log/nginx/blog/access.log logverbose;
+#    error_log  /var/log/nginx/blog/error.log;
+#
+#    rewrite ^/(.*)$ http://ring0.me/$1 permanent;
+#}
