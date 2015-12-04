@@ -1,8 +1,7 @@
 server {
-	listen 80;
-	listen [::]:80;
-	listen   443 ssl;
-	listen   [::]:443 ssl;
+
+	include conf.d/local_listen_http;
+	include conf.d/local_listen_https;
 
         server_name ~(?<name>[\w-]+)\.blog\.ustc\.edu\.cn$;
 
