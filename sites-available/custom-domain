@@ -1,4 +1,2 @@
 # for blog
 include /etc/nginx/autogen-conf-blog/*;
-# for freeshell
-include /etc/nginx/autogen-conf/*;

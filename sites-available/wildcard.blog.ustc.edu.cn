@@ -1,0 +1,13 @@
+server {
+	listen 80;
+	listen [::]:80;
+	listen   443 ssl;
+	listen   [::]:443 ssl;
+
+        server_name ~(?<name>[\w-]+)\.blog\.ustc\.edu\.cn$;
+
+	ssl_certificate     /etc/nginx/ssl-keys/blog-alphassl-bundle.crt;
+	ssl_certificate_key /etc/nginx/ssl-keys/blog-alphassl-nopasswd.key;
+
+	include sites-available/blog.common.conf;
+}
