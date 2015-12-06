@@ -1,8 +1,15 @@
 server {
-	listen 80 default_server;
-	listen 443 default_server spdy ssl;
-	listen [::]:80 ipv6only=on default_server;
-	listen [::]:443 ipv6only=on default_server spdy ssl;
+	
+	listen 202.141.160.98:80 default_server;
+	listen 202.141.176.98:80 default_server;
+	listen 10.254.10.1:80 default_server;
+	listen 127.0.0.1:80 default_server;
+	listen 202.141.160.98:443 default_server ssl;
+	listen 202.141.176.98:443 default_server ssl;
+	listen 10.254.10.1:443 default_server ssl;
+	listen 127.0.0.1:443 default_server ssl;
+	listen [2001:da8:d800:f001:250:56ff:fe9f:54]:80 ipv6only=on default_server;
+	listen [2001:da8:d800:f001:250:56ff:fe9f:54]:443 ipv6only=on default_server ssl;
 
         ssl_certificate     /etc/nginx/ssl-keys/blog-alphassl-bundle.crt;
         ssl_certificate_key /etc/nginx/ssl-keys/blog-alphassl-nopasswd.key;
