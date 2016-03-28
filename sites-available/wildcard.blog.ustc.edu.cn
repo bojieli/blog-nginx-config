@@ -5,8 +5,8 @@ server {
 
         server_name ~(?<name>[\w-]+)\.blog\.ustc\.edu\.cn$;
 
-	ssl_certificate     /etc/nginx/ssl-keys/blog-alphassl-bundle.crt;
-	ssl_certificate_key /etc/nginx/ssl-keys/blog-alphassl-nopasswd.key;
+	ssl_certificate     /etc/nginx/ssl-keys/blog-startssl-20160328.crt;
+	ssl_certificate_key /etc/nginx/ssl-keys/blog-startssl-20160328.key;
 
 	include sites-available/blog.common.conf;
 }
